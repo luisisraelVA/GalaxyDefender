@@ -14,7 +14,7 @@ class GALAXYDEFENDER_API UGDConstructorNivel : public UObject
 {
 	GENERATED_BODY()
 public:
-	// Funciones que armarán el nivel paso a paso
+	
 	void ConstruirFondoEspacial();
 	void ConstruirMeteoritos();
 	void ConstruirEnemigosBasicos();
