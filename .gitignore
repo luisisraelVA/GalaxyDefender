@@ -1,0 +1,21 @@
+# Cache y archivos temporales de Unreal Engine
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Archivos de Visual Studio
+.vs/
+*.sln
+*.suo
+*.db
+*.opendb
+*.VC.db
+
+# Logs y reportes de errores
+*.log
+*.crash
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
