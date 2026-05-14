@@ -6,6 +6,9 @@
 #include "UObject/NoExportTypes.h"
 #include "GDConstructorNivel.generated.h"
 
+
+class UUGDRegistroNivel;
+class UGDAlphaSectorFactory;
 /**
  * 
  */
@@ -19,4 +22,13 @@ public:
 	void ConstruirMeteoritos();
 	void ConstruirEnemigosBasicos();
 	void ConstruirPowerUps();
+	void SetRegistro(UUGDRegistroNivel* EnRegistro);
+
+private:
+	// Punteros para la integración
+	UPROPERTY()
+	UUGDRegistroNivel* RegistroActual;
+
+	UPROPERTY()
+	UGDAlphaSectorFactory* FabricaAlfa;
 };

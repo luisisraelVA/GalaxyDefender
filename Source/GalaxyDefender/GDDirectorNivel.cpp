@@ -27,6 +27,7 @@ void UGDDirectorNivel::ConstruirNivel(int32 NumeroNivel, UGDConstructorNivel* Co
 		// Nivel 2: Campo de Asteroides
 		ConstructorActual->ConstruirFondoEspacial();
 		ConstructorActual->ConstruirMeteoritos();
+		ConstructorActual->ConstruirPowerUps(); // <- Aquí están los Power-Ups
 		ConstructorActual->ConstruirEnemigosBasicos();
 		break;
 

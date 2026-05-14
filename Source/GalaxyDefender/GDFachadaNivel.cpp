@@ -20,7 +20,11 @@ void AGDFachadaNivel::BeginPlay()
 	Constructor = NewObject<UGDConstructorNivel>(this);
 	Director = NewObject<UGDDirectorNivel>(this);
 
+	Constructor->SetRegistro(Registro);
+
 	UE_LOG(LogTemp, Warning, TEXT("Fachada: Sistema Operacion Nebulosa inicializado y listo."));
+
+	IniciarNivel(2);
 }
 
 void AGDFachadaNivel::IniciarNivel(int32 NumeroNivel)

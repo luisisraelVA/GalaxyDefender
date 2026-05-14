@@ -32,9 +32,11 @@ AGDObstacleBase* UGDAlphaSectorFactory::CrearObstaculoPrincipal(UWorld* World, c
 		return nullptr;
 	}
 
-	UE_LOG(LogTemp, Warning, TEXT("UGDAlphaSectorFactory: Sector Alfa no usa obstáculo principal todavía."));
+	UE_LOG(LogTemp, Warning, TEXT("UGDAlphaSectorFactory: Fabricando Meteorito para el Sector Alfa."));
 
-	return nullptr;
+	// ¡AQUI ESTA EL CAMBIO! Le pedimos al ElementFactory de Mari que nos dé el meteorito.
+	// Asumo que su función se llama CrearMeteorito. Si le puso otro nombre, solo ajustalo.
+	return ElementFactory->CrearMeteorito(World, Posicion, Rotacion);
 }
 
 AGDPowerUpBase* UGDAlphaSectorFactory::CrearPowerUpPrincipal(UWorld* World, const FVector& Posicion, const FRotator& Rotacion)
