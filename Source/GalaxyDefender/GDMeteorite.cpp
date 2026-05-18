@@ -29,5 +29,9 @@ void AGDMeteorite::BeginPlay()
 void AGDMeteorite::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	FRotator Rot = GetActorRotation();
+	Rot.Yaw += VelocidadRotacion * DeltaTime;
+	Rot.Pitch += VelocidadRotacion * 0.5f * DeltaTime;
+	SetActorRotation(Rot);
 }
 

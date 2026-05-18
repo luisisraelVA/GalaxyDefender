@@ -1,28 +1,27 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "GDEnemyBasic.h"
+#include "GDEnemyShooter.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
-
-AGDEnemyBasic::AGDEnemyBasic()
+AGDEnemyShooter::AGDEnemyShooter()
 {
-	ConfigurarStats(100.f, 200.f, 10.f, 50);
+	ConfigurarStats(150.f, 200.f, 15.f, 100);
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Engine/BasicShapes/Cube.Cube"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
 	if (MeshAsset.Succeeded() && MeshComponent)
 		MeshComponent->SetStaticMesh(MeshAsset.Object);
 
 	SetActorScale3D(FVector(1.f));
 }
 
-void AGDEnemyBasic::BeginPlay()
+void AGDEnemyShooter::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("GDEnemyBasic listo"));
+	UE_LOG(LogTemp, Warning, TEXT("GDEnemyShooter listo"));
 }
 
-void AGDEnemyBasic::Tick(float DeltaTime)
+void AGDEnemyShooter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	if (!EstaMuerto())

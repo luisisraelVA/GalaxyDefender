@@ -1,28 +1,29 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "GDEnemyBasic.h"
+#include "GDEnemyTank.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
 
-AGDEnemyBasic::AGDEnemyBasic()
+
+AGDEnemyTank::AGDEnemyTank()
 {
-	ConfigurarStats(100.f, 200.f, 10.f, 50);
+	ConfigurarStats(300.f, 150.f, 25.f, 150);
 
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Engine/BasicShapes/Cube.Cube"));
 	if (MeshAsset.Succeeded() && MeshComponent)
 		MeshComponent->SetStaticMesh(MeshAsset.Object);
 
-	SetActorScale3D(FVector(1.f));
+	SetActorScale3D(FVector(1.2f));
 }
 
-void AGDEnemyBasic::BeginPlay()
+void AGDEnemyTank::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("GDEnemyBasic listo"));
+	UE_LOG(LogTemp, Warning, TEXT("GDEnemyTank listo"));
 }
 
-void AGDEnemyBasic::Tick(float DeltaTime)
+void AGDEnemyTank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	if (!EstaMuerto())
