@@ -2,6 +2,14 @@
 
 
 #include "GDElementFactory.h"
+#include "GDEnemyFast.h"
+#include "GDEnemyBasic.h"
+#include "GDEnemyTank.h"
+#include "GDEnemyShooter.h"
+#include "GDEnemyBoss.h"
+#include "GDPowerUpShield.h"
+#include "GDPowerUpDoubleShot.h"
+#include "GDPowerUpSpeed.h"
 #include "Engine/World.h"
 
 UGDElementFactory::UGDElementFactory()
@@ -92,3 +100,42 @@ AGDPowerUpBase* UGDElementFactory::CrearPowerUpBase(UWorld* World, const FVector
 	return PowerUp;
 }
 
+AGDEnemyBase* UGDElementFactory::CrearEnemyFast(UWorld* Mundo, FVector Posicion)
+{
+	return Mundo->SpawnActor<AGDEnemyFast>(AGDEnemyFast::StaticClass(), Posicion, FRotator::ZeroRotator);
+}
+
+AGDEnemyBase* UGDElementFactory::CrearEnemyBasic(UWorld* Mundo, FVector Posicion)
+{
+	return Mundo->SpawnActor<AGDEnemyBasic>(AGDEnemyBasic::StaticClass(), Posicion, FRotator::ZeroRotator);
+}
+
+AGDEnemyBase* UGDElementFactory::CrearEnemyTank(UWorld* Mundo, FVector Posicion)
+{
+	return Mundo->SpawnActor<AGDEnemyTank>(AGDEnemyTank::StaticClass(), Posicion, FRotator::ZeroRotator);
+}
+
+AGDEnemyBase* UGDElementFactory::CrearEnemyShooter(UWorld* Mundo, FVector Posicion)
+{
+	return Mundo->SpawnActor<AGDEnemyShooter>(AGDEnemyShooter::StaticClass(), Posicion, FRotator::ZeroRotator);
+}
+
+AGDEnemyBase* UGDElementFactory::CrearEnemyBoss(UWorld* Mundo, FVector Posicion)
+{
+	return Mundo->SpawnActor<AGDEnemyBoss>(AGDEnemyBoss::StaticClass(), Posicion, FRotator::ZeroRotator);
+}
+
+// PowerUps
+AGDPowerUpBase* UGDElementFactory::CrearPowerUpShield(UWorld* Mundo, FVector Posicion)
+{
+	return Mundo->SpawnActor<AGDPowerUpShield>(AGDPowerUpShield::StaticClass(), Posicion, FRotator::ZeroRotator);
+}
+
+AGDPowerUpBase* UGDElementFactory::CrearPowerUpDoubleShot(UWorld* Mundo, FVector Posicion)
+{
+	return Mundo->SpawnActor<AGDPowerUpDoubleShot>(AGDPowerUpDoubleShot::StaticClass(), Posicion, FRotator::ZeroRotator);
+}
+AGDPowerUpBase* UGDElementFactory::CrearPowerUpSpeed(UWorld* Mundo, FVector Posicion)
+{
+	return Mundo->SpawnActor<AGDPowerUpSpeed>(AGDPowerUpSpeed::StaticClass(), Posicion, FRotator::ZeroRotator);
+}

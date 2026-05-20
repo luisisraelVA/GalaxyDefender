@@ -1,10 +1,6 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "GDEnemyTank.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
-
 
 AGDEnemyTank::AGDEnemyTank()
 {
@@ -20,12 +16,12 @@ AGDEnemyTank::AGDEnemyTank()
 void AGDEnemyTank::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("GDEnemyTank listo"));
 }
 
 void AGDEnemyTank::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
 	if (!EstaMuerto())
 	{
 		FVector Pos = GetActorLocation();

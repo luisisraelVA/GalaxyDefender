@@ -1,9 +1,7 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "GDEnemyShooter.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/StaticMeshComponent.h"
+
 AGDEnemyShooter::AGDEnemyShooter()
 {
 	ConfigurarStats(150.f, 200.f, 15.f, 100);
@@ -24,6 +22,7 @@ void AGDEnemyShooter::BeginPlay()
 void AGDEnemyShooter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
 	if (!EstaMuerto())
 	{
 		FVector Pos = GetActorLocation();

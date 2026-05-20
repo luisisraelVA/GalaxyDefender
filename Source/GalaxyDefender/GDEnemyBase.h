@@ -4,58 +4,55 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/StaticMeshComponent.h"
 #include "GDEnemyBase.generated.h"
 
 UCLASS()
 class GALAXYDEFENDER_API AGDEnemyBase : public AActor
 {
-	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	AGDEnemyBase();
-
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
-	UPROPERTY(VisibleAnywhere, Category = "GD Enemy")
-	UStaticMeshComponent* MeshComponent;
-
-	UPROPERTY(VisibleAnywhere, Category = "GD Enemy")
-	float Vida;
-
-	UPROPERTY(VisibleAnywhere, Category = "GD Enemy")
-	float Velocidad;
-
-	UPROPERTY(VisibleAnywhere, Category = "GD Enemy")
-	float Dano;
-
-	UPROPERTY(VisibleAnywhere, Category = "GD Enemy")
-	int32 Puntos;
-
-	UPROPERTY(VisibleAnywhere, Category = "GD Enemy")
-	bool bEstaMuerto;
+    GENERATED_BODY()
 
 public:
-	virtual void Tick(float DeltaTime) override;
+    AGDEnemyBase();
 
-	virtual void ConfigurarStats(float NuevaVida, float NuevaVelocidad, float NuevoDano, int32 NuevosPuntos);
+protected:
+    virtual void BeginPlay() override;
 
-	virtual void RecibirDano(float CantidadDano);
+public:
+    virtual void Tick(float DeltaTime) override;
 
-	virtual void Morir();
+    UPROPERTY(VisibleAnywhere)
+    UStaticMeshComponent* MeshComponent;
 
-	void SetVida(float NuevaVida);
-	void SetVelocidad(float NuevaVelocidad);
-	void SetDano(float NuevoDano);
-	void SetPuntos(int32 NuevosPuntos);
+    UPROPERTY(EditAnywhere)
+    float Vida;
 
-	float GetVida() const;
-	float GetVelocidad() const;
-	float GetDano() const;
-	int32 GetPuntos() const;
-	bool EstaMuerto() const;
+    UPROPERTY(EditAnywhere)
+    float Velocidad;
 
-	UStaticMeshComponent* GetMeshComponent() const;
+    UPROPERTY(EditAnywhere)
+    float Dano;
+
+    UPROPERTY(EditAnywhere)
+    int32 Puntos;
+
+    UPROPERTY(VisibleAnywhere)
+    bool bEstaMuerto;
+
+    void ConfigurarStats(float NuevaVida, float NuevaVelocidad, float NuevoDano, int32 NuevosPuntos);
+    void RecibirDano(float CantidadDano);
+    void Morir();
+
+    void SetVida(float NuevaVida);
+    void SetVelocidad(float NuevaVelocidad);
+    void SetDano(float NuevoDano);
+    void SetPuntos(int32 NuevosPuntos);
+
+    float GetVida() const;
+    float GetVelocidad() const;
+    float GetDano() const;
+    int32 GetPuntos() const;
+    bool EstaMuerto() const;
+
+    UStaticMeshComponent* GetMeshComponent() const;
 };

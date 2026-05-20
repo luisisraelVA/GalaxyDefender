@@ -1,46 +1,52 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/StaticMeshComponent.h"
 #include "GDPowerUpBase.generated.h"
 
 UCLASS()
 class GALAXYDEFENDER_API AGDPowerUpBase : public AActor
 {
-	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	AGDPowerUpBase();
+    GENERATED_BODY()
+
+public:
+    AGDPowerUpBase();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-	UPROPERTY(VisibleAnywhere, Category = "GD PowerUp")
-	UStaticMeshComponent* MeshComponent;
+    virtual void BeginPlay() override;
 
-	UPROPERTY(VisibleAnywhere, Category = "GD PowerUp")
-	FString NombrePowerUp;
+public:
+    virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(VisibleAnywhere, Category = "GD PowerUp")
-	float Duracion;
+    // Mesh del PowerUp
+    UPROPERTY(VisibleAnywhere)
+    UStaticMeshComponent* MeshComponent;
 
-	UPROPERTY(VisibleAnywhere, Category = "GD PowerUp")
-	bool bConsumido;
+    // Tipo de PowerUp (Shield, DoubleShot, Speed)
+    UPROPERTY(VisibleAnywhere)
+    FString TipoPowerUp;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-	virtual void ConfigurarPowerUp(const FString& NuevoNombre, float NuevaDuracion);
+    // Duración del efecto
+    UPROPERTY(VisibleAnywhere)
+    float Duracion;
 
-	virtual void AplicarPowerUp(AActor* Objetivo);
+    // Si ya fue consumido
+    UPROPERTY(VisibleAnywhere)
+    bool bConsumido;
 
-	virtual void ConsumirPowerUp();
+    // Configura el PowerUp
+    virtual void ConfigurarPowerUp(const FString& NuevoNombre, float NuevaDuracion);
 
-	FString GetNombrePowerUp() const;
-	float GetDuracion() const;
-	bool EstaConsumido() const;
-	UStaticMeshComponent* GetMeshComponent() const;
+    // Aplica el PowerUp a un actor
+    virtual void AplicarPowerUp(AActor* Objetivo);
+
+    // Marca como consumido
+    virtual void ConsumirPowerUp();
+
+    // Getters
+    FString GetTipoPowerUp() const;
+    float GetDuracion() const;
+    bool EstaConsumido() const;
+    UStaticMeshComponent* GetMeshComponent() const;
 };

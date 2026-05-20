@@ -8,71 +8,53 @@
 // Sets default values
 AGDPowerUpBase::AGDPowerUpBase()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PowerUpMesh"));
+
+	MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	RootComponent = MeshComponent;
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> MeshAsset(TEXT("/Engine/BasicShapes/Sphere.Sphere"));
-
-	if (MeshAsset.Succeeded())
-	{
-		MeshComponent->SetStaticMesh(MeshAsset.Object);
-	}
-
-	NombrePowerUp = TEXT("PowerUpBase");
-	Duracion = 5.0f;
+	TipoPowerUp = "Base";
+	Duracion = 5.f;
 	bConsumido = false;
-
-	SetActorScale3D(FVector(0.5f, 0.5f, 0.5f));
 }
 
-// Called when the game starts or when spawned
 void AGDPowerUpBase::BeginPlay()
 {
 	Super::BeginPlay();
-	UE_LOG(LogTemp, Warning, TEXT("AGDPowerUpBase creado."));
 }
 
-// Called every frame
 void AGDPowerUpBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	FRotator NuevaRotacion = GetActorRotation();
-	NuevaRotacion.Yaw += 90.0f * DeltaTime;
-	SetActorRotation(NuevaRotacion);
+	// Rotación simple para visualizar
+	if (MeshComponent)
+	{
+		FRotator Rot = MeshComponent->GetComponentRotation();
+		Rot.Yaw += 60.f * DeltaTime;
+		MeshComponent->SetWorldRotation(Rot);
+	}
 }
+
 void AGDPowerUpBase::ConfigurarPowerUp(const FString& NuevoNombre, float NuevaDuracion)
 {
-	NombrePowerUp = NuevoNombre;
+	TipoPowerUp = NuevoNombre;
 	Duracion = NuevaDuracion;
 }
 
 void AGDPowerUpBase::AplicarPowerUp(AActor* Objetivo)
 {
-	if (!Objetivo || bConsumido)
-	{
-		return;
-	}
-
-	UE_LOG(LogTemp, Warning, TEXT("PowerUp aplicado: %s"), *NombrePowerUp);
-
-	ConsumirPowerUp();
+	// Funcionalidad base, puede sobrescribirse en hijos
 }
 
 void AGDPowerUpBase::ConsumirPowerUp()
 {
-	if (bConsumido)
-	{
-		return;
-	}
-
 	bConsumido = true;
 	Destroy();
 }
-FString AGDPowerUpBase::GetNombrePowerUp() const
+
+FString AGDPowerUpBase::GetTipoPowerUp() const
 {
-	return NombrePowerUp;
+	return TipoPowerUp;
 }
 
 float AGDPowerUpBase::GetDuracion() const

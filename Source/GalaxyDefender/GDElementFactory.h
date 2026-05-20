@@ -27,4 +27,15 @@ public:
 	AGDObstacleBase* CrearMeteorito(UWorld* World, const FVector& Posicion, const FRotator& Rotacion);
 
 	AGDPowerUpBase* CrearPowerUpBase(UWorld* World, const FVector& Posicion, const FRotator& Rotacion);
+    // Enemigos
+    AGDEnemyBase* CrearEnemyFast(UWorld* Mundo, FVector Posicion);
+    AGDEnemyBase* CrearEnemyBasic(UWorld* Mundo, FVector Posicion);
+    AGDEnemyBase* CrearEnemyTank(UWorld* Mundo, FVector Posicion);
+    AGDEnemyBase* CrearEnemyShooter(UWorld* Mundo, FVector Posicion);
+    AGDEnemyBase* CrearEnemyBoss(UWorld* Mundo, FVector Posicion);
+
+    // PowerUps
+    AGDPowerUpBase* CrearPowerUpShield(UWorld* Mundo, FVector Posicion);
+    AGDPowerUpBase* CrearPowerUpDoubleShot(UWorld* Mundo, FVector Posicion);
+    AGDPowerUpBase* CrearPowerUpSpeed(UWorld* Mundo, FVector Posicion);
 };
