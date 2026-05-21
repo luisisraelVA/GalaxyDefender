@@ -38,4 +38,6 @@ public:
     AGDPowerUpBase* CrearPowerUpShield(UWorld* Mundo, FVector Posicion);
     AGDPowerUpBase* CrearPowerUpDoubleShot(UWorld* Mundo, FVector Posicion);
     AGDPowerUpBase* CrearPowerUpSpeed(UWorld* Mundo, FVector Posicion);
+
+    TSubclassOf<class AGDObstacleBase> ClaseMeteoritoBP;
 };

@@ -1,34 +1,33 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "GDConstructorNivel.generated.h"
 
-
 class UUGDRegistroNivel;
-class UGDAlphaSectorFactory;
-/**
- * 
- */
+class UGDSectorAbstractFactory; // Apuntamos a la clase base abstracta
+
 UCLASS()
 class GALAXYDEFENDER_API UGDConstructorNivel : public UObject
 {
 	GENERATED_BODY()
 public:
-	
+
 	void ConstruirFondoEspacial();
 	void ConstruirMeteoritos();
 	void ConstruirEnemigosBasicos();
 	void ConstruirPowerUps();
+
+	// ¡Devolvemos la función del Registro que nos faltaba!
 	void SetRegistro(UUGDRegistroNivel* EnRegistro);
 
+	// Función para la fábrica polimórfica
+	void SetFabricaActual(UGDSectorAbstractFactory* NuevaFabrica);
+
 private:
-	// Punteros para la integración
 	UPROPERTY()
 	UUGDRegistroNivel* RegistroActual;
 
 	UPROPERTY()
-	UGDAlphaSectorFactory* FabricaAlfa;
+	UGDSectorAbstractFactory* FabricaActual;
 };

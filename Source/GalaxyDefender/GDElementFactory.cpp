@@ -14,6 +14,18 @@
 
 UGDElementFactory::UGDElementFactory()
 {
+	// ARREGLO 1: Ruta limpia, sin "Blueprint" y terminando en _C
+	static ConstructorHelpers::FClassFinder<AGDObstacleBase> ObjetoMeteorito(TEXT("/Game/Modelos3D/BP_Meteorito.BP_Meteorito_C"));
+
+	if (ObjetoMeteorito.Succeeded())
+	{
+		ClaseMeteoritoBP = ObjetoMeteorito.Class;
+		UE_LOG(LogTemp, Warning, TEXT("Fabrica Elementos: ¡BP_Meteorito encontrado y cargado con exito!"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Error, TEXT("Fabrica Elementos: No se pudo encontrar la ruta de BP_Meteorito."));
+	}
 }
 
 AGDEnemyBase* UGDElementFactory::CrearEnemigoBasico(UWorld* World, const FVector& Posicion, const FRotator& Rotacion)
@@ -56,17 +68,25 @@ AGDObstacleBase* UGDElementFactory::CrearMeteorito(UWorld* World, const FVector&
 	SpawnParams.Name = NAME_None;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
-	AGDMeteorite* Meteorito = World->SpawnActor<AGDMeteorite>(
-		AGDMeteorite::StaticClass(),
-		Posicion,
-		Rotacion,
-		SpawnParams
-	);
+	AGDObstacleBase* Meteorito = nullptr;
 
-	if (Meteorito)
+	// ARREGLO 2: Usamos tu Blueprint (ClaseMeteoritoBP)
+	if (ClaseMeteoritoBP)
 	{
-		Meteorito->ConfigurarObstaculo(200.0f, 25.0f, 80.0f);
-		UE_LOG(LogTemp, Warning, TEXT("Factory creó AGDMeteorite en: %s"), *Posicion.ToString());
+		Meteorito = World->SpawnActor<AGDObstacleBase>(ClaseMeteoritoBP, Posicion, Rotacion, SpawnParams);
+		UE_LOG(LogTemp, Warning, TEXT("Factory creó el METEORITO 3D en: %s"), *Posicion.ToString());
+	}
+	else
+	{
+		// Si por alguna razón falla el BP, usa el código de respaldo
+		Meteorito = World->SpawnActor<AGDMeteorite>(AGDMeteorite::StaticClass(), Posicion, Rotacion, SpawnParams);
+		UE_LOG(LogTemp, Warning, TEXT("Factory creó el meteorito gris (fallback) en: %s"), *Posicion.ToString());
+	}
+
+	// Como el Blueprint devuelve un AGDObstacleBase, hacemos Cast para usar la función de Mari
+	if (AGDMeteorite* MetCast = Cast<AGDMeteorite>(Meteorito))
+	{
+		MetCast->ConfigurarObstaculo(200.0f, 25.0f, 80.0f);
 	}
 
 	return Meteorito;
